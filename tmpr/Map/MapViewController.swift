@@ -22,7 +22,6 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         
         collectionView.delegate = self
-        collectionView.dataSource = self
         mapView.delegate = self
 
         setupViewModelListners()
@@ -42,6 +41,12 @@ class MapViewController: UIViewController {
         viewModal.centerCoordinate.subscribe {
             self.mapView.setCenter($0, zoomLevel: 200, animated: true)
         }.disposed(by: disposeBag)
+        // populate the collection view with the jobs
+        viewModal.jobs.bind(to: collectionView.rx.items(cellIdentifier: "JobCollectionCell", cellType: JobCollectionViewCell.self)) { index, job, cell in
+            DispatchQueue.main.async {
+                cell.updateCell(job: job)
+            }
+        }.disposed(by: disposeBag)
         // scroll to the collection view cell, when the user tapped an annotation
         viewModal.selectedAnnotationIndex.subscribe {
             self.collectionView.scrollToItem(at: IndexPath(item: $0, section: 0), at: .centeredHorizontally, animated: true)
@@ -59,29 +64,10 @@ class MapViewController: UIViewController {
 }
 
 //MARK: UITableView delegate methods
-extension MapViewController:
-    UICollectionViewDelegate,
-    UICollectionViewDataSource,
-    UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-       return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModal._jobs.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "JobCollectionCell", for: indexPath) as! JobCollectionViewCell
-        cell.updateCell(job: viewModal._jobs[indexPath.row])
-        return cell
-    }
-    
+extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewModal.selectedCellIndex.onNext(indexPath.row)
     }
-    
 }
 
 //MARK: MKMapView delegate methods

@@ -14,12 +14,13 @@ import MapKit
 class MapViewModal {
     private var disposeBag = DisposeBag()
     private var _annotations: [MKPointAnnotation] = []
-    var _jobs: [Job] = []
+    private var _jobs: [Job] = []
     
     var selectedCellIndex = PublishSubject<Int>()
     var selectedAnnotationIndex = PublishSubject<Int>()
     var selectedAnnotation = PublishSubject<MKPointAnnotation>()
     
+    var jobs = BehaviorSubject<[Job]>(value: [])
     var annotations = BehaviorSubject<[MKAnnotation]>(value: [])
     var centerCoordinate = PublishSubject<CLLocationCoordinate2D>()
     
@@ -44,8 +45,11 @@ class MapViewModal {
         if let firstAnnotation = _annotations.first {
             centerCoordinate.onNext(firstAnnotation.coordinate)
         }
+        
         // emit the annotations
         annotations.onNext(_annotations)
+        // emit the jobs
+        jobs.onNext(_jobs)
         
         selectedCellIndex.subscribe {
             self.centerCoordinate.onNext(self._annotations[$0].coordinate)
