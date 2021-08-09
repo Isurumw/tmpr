@@ -15,8 +15,8 @@ class JobsViewController: UIViewController {
     @IBOutlet weak var conBottomTableView: NSLayoutConstraint!
     
     private var viewModal: JobsViewModal!
-    let disposeBag = DisposeBag()
-    let attributes = RappleActivityIndicatorView.attribute(style: .circle)
+    private let disposeBag = DisposeBag()
+    private let attributes = RappleActivityIndicatorView.attribute(style: .circle)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +107,7 @@ extension JobsViewController: UITableViewDelegate {
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        
+        // Determined the user has reached the bottom of the scroll view
         if distanceFromBottom < height && viewModal.jobCount > 0 {
             viewModal.nextPage.onNext(.next)
         }

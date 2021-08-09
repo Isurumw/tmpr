@@ -58,6 +58,7 @@ class MapViewController: UIViewController {
     
 }
 
+//MARK: UITableView delegate methods
 extension MapViewController:
     UICollectionViewDelegate,
     UICollectionViewDataSource,
@@ -83,6 +84,7 @@ extension MapViewController:
     
 }
 
+//MARK: MKMapView delegate methods
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
