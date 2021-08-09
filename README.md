@@ -14,3 +14,7 @@ Temper is a Freelancer job  search tool
 * Run the command `pod install` and install all the required pods
 * Open the project by tapping `.xcworkspace`
 * Awesome now you were there, to play with the app
+
+### Hidden hint
+
+* By tapping the `Kaart` button at the bottom of the main screen, You'll be redirect to the map view (MapView with markers representing the Jobs with their Shifts)
