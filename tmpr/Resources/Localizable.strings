@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  tmpr
+
+  Created by Isuru on 2021-08-06.
+  
+*/
+
+// Main - screen
+SIGN_UP = "Sign up";
+LOG_IN = "Log in";
+FILTERS = "Filters";
+KAART = "Kaart";
+
+// Sign up - screen
+SIGN_UP_TITLE = "Sign Up";
+SIGN_UP_LABEL = "Welcome to the sign up !";
+
+// Sign in - screen
+SIGN_IN_TITLE = "Log In";
+SIGN_IN_LABEL = "Welcome to the login !";
+
+// Map - screen
+MAP_VIEW_TITLE = "Map View";
+
+// Jobs view modal
+FAILED_TO_LOAD_JOBS = "Failed to load jobs, please try agin!";
