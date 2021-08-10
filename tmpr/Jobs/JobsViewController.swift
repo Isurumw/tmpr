@@ -56,12 +56,9 @@ class JobsViewController: UIViewController {
         viewModal = JobsViewModal()
         
         // listen to the fetch jobs web service and update the tableview, once the responces received
-        viewModal.jobs.bind(to: tableView.rx.items(cellIdentifier: "JobsCell")){ index, job, cell in
-            // cast the cell as the class type
-            if let cell = cell as? JobsTableViewCell {
-                // Update the table view cell with the job details
-                cell.updateCell(job: job)
-            }
+        viewModal.jobs.bind(to: tableView.rx.items(cellIdentifier: "JobsCell", cellType: JobsTableViewCell.self)){ index, job, cell in
+            // Update the table view cell with the job details
+            cell.updateCell(job: job)
         }.disposed(by: disposeBag)
         // listen to the observer `loader`, which desired what loader should appear in the screen and which should disappear
         viewModal.loader.subscribe {

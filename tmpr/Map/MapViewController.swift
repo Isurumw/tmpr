@@ -43,9 +43,7 @@ class MapViewController: UIViewController {
         }.disposed(by: disposeBag)
         // populate the collection view with the jobs
         viewModal.jobs.bind(to: collectionView.rx.items(cellIdentifier: "JobCollectionCell", cellType: JobCollectionViewCell.self)) { index, job, cell in
-            DispatchQueue.main.async {
-                cell.updateCell(job: job)
-            }
+            cell.updateCell(job: job)
         }.disposed(by: disposeBag)
         // scroll to the collection view cell, when the user tapped an annotation
         viewModal.selectedAnnotationIndex.subscribe {

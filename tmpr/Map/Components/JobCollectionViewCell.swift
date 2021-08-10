@@ -21,12 +21,10 @@ class JobCollectionViewCell: UICollectionViewCell {
     }
     
     func updateCell(job: Job) {
-        DispatchQueue.main.async {
-            self.lblTitle?.text = job.jobDescription?.title
-            self.imgJob?.sd_setImage(with: job.jobDescription?.project?.client?.links?.heroImage, placeholderImage: UIImage(named: "Placeholder"))
-            self.lblTimeShift?.text = "\(job.startsAt?.formattedTime ?? "...") - \(job.endsAt?.formattedTime ?? "...")"
-            self.lblHourlyCost?.text = "€ \(job.earningsPerHour?.amount ?? 0.0)"
-        }
+        lblTitle?.text = job.jobDescription?.title
+        imgJob?.sd_setImage(with: job.jobDescription?.project?.client?.links?.heroImage, placeholderImage: UIImage(named: "Placeholder"))
+        lblTimeShift?.text = "\(job.startsAt?.formattedTime ?? "...") - \(job.endsAt?.formattedTime ?? "...")"
+        lblHourlyCost?.text = "€ \(job.earningsPerHour?.amount ?? 0.0)"
     }
     
     func styling() {
